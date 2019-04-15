@@ -50,21 +50,46 @@ void gera_dado(FILE *fp){
 			c[y]=1;
 			if(fp!=NULL){
 				fprintf(fp,"%d\t",y);
-				printf("y=%d\t",y);
 			}
-		}else{
+		}else if(c[y]!=0){
 			long int w=y;
-			w+=rand()%300;
-			while(c[w]!=0&&w<1000000){
-				w+=1;
+			while(c[w]!=0||w<100000){
+				w++;
 			}
 			c[w]=1;
 			if(fp!=NULL){
 				fprintf(fp,"%d\t",w);
-				printf("w=%d\t",w);
 			}
 		}
+		
+		int t;
+		
+		//Geração e gravação do nome
+		char aux[50], aux1[50], aux2[50];
+		fim=5+rand()%25;
+		for(t=0;t<fim;t++){
+			aux[t]=v[rand()%51];
+		}
+		
+		aux[t]='\0';
+		//printf("%s\t%d\n",aux,i);
+		grava_dados(fp,aux);
+		
+		//Geração e gravação do email
+		strcpy(aux1,aux);
+		strcat(aux1,mail);
+		grava_dados(fp,aux1);
+		
+		//Geração e gravação da senha
+		fim=5+rand()%25;
+		for(t=0;t<fim;t++){
+			aux2[t]=v[rand()%51];
+		}
+		
+		aux[t]='\0';
+		grava_senha(fp,aux2);
 	}
 	
+	fecha_arquivo(fp);
 	free(c);
 }
