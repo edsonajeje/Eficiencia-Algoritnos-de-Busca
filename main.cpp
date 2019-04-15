@@ -25,7 +25,7 @@ main(){
 	gera_dado(fp);
 	printf("saiu de gera_dado\n");
 	
-	abastecer(a,fp);
+	/*abastecer(a,fp);
 	printf("%d\t%s\t%s\t%s\n", a[0].cod,a[0].nome,a[0].email,a[0].senha);
 	printf("%d\t%s\t%s\t%s\n", a[50000].cod, a[50000].nome, a[50000].email, a[50000].senha);
 	printf("%d\t%s\t%s\t%s\n", a[99999].cod, a[99999].nome, a[99999].email, a[99999].senha);
@@ -42,7 +42,7 @@ main(){
 	
 	for(int i=0;i<50;i++){
 		printf("%d\t",v[i]);
-	}
+	}*/
 	
 	free(a);
 	
