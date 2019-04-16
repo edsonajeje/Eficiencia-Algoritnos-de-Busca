@@ -23,15 +23,22 @@ int iniciar(){
 	srand(time(NULL));
 	long int cod=rand()%RAND_MAX;
 	
+	User *vet_temp=(User*)malloc(100000*sizeof(User));
+	
 	//sequencial X binaria & BubbleSort
 	while(tmili_seq<=tmili_bin){
-		User *vet_temp=(User*)malloc(qtd*sizeof(User));
 		for(int i=0;i<qtd;i++){
-			vet_temp[i]=a[cod];
-			if(qtd<90000)
-				cod+=rand()%RAND_MAX/3;
-			else
-				cod+=rand()%1000;
+			cod=rand()%RAND_MAX;
+			printf("Entrou no for vez %d\n",i);
+			vet_temp[i].cod=a[cod].cod;
+			strcpy(vet_temp[i].nome,a[cod].nome);
+			strcpy(vet_temp[i].email,a[cod].email);
+			strcpy(vet_temp[i].senha,a[cod].senha);
+			
+			printf("%d\t",vet_temp[i].cod);
+			if(qtd<999999)
+				cod+=((rand()%RAND_MAX)/3)/1000;
+			
 		}
 		
 		chave=vet_temp[rand()%cod].cod;
