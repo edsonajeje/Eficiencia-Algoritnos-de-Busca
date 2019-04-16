@@ -39,13 +39,16 @@ int iniciar(){
 		//busca sequencial
 		gettimeofday(&inicio,NULL);
 		sequencial(vet_temp,chave,qtd);
+		printf("Saiu sequencial\n");
 		gettimeofday(&fim,NULL);
 		tmili_seq=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
 		
 		//busca binaria
 		gettimeofday(&inicio,NULL);
 		bubble(vet_temp,qtd);
+		printf("Saiu bubble\n");
 		binaria(vet_temp,chave,qtd);
+		printf("Saiu binaria\n");
 		gettimeofday(&fim,NULL);
 		tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
 		
