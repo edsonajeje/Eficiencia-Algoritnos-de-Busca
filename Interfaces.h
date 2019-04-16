@@ -38,6 +38,8 @@ int iniciar(){
 			printf("%d\t",vet_temp[i].cod);
 			if(qtd<999999)
 				cod+=((rand()%RAND_MAX)/3)/1000;
+			else
+				cod=999999;
 			
 		}
 		
