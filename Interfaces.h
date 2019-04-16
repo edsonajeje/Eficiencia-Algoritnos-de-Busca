@@ -12,7 +12,7 @@ int iniciar();
 
 
 int iniciar(){
-	int qtd=150;
+	int qtd=1000;
 	
 	struct timeval inicio, fim;
 	double tmili_seq, tmili_bin;
@@ -27,8 +27,8 @@ int iniciar(){
 	
 	//sequencial X binaria & BubbleSort
 	while(tmili_seq<=tmili_bin){
+		cod=rand()%RAND_MAX;
 		for(int i=0;i<qtd;i++){
-			cod=rand()%RAND_MAX;
 			vet_temp[i].cod=a[cod].cod;
 			strcpy(vet_temp[i].nome,a[cod].nome);
 			strcpy(vet_temp[i].email,a[cod].email);
@@ -40,7 +40,7 @@ int iniciar(){
 				cod=999999;
 		}
 		
-		chave=vet_temp[rand()%cod].cod;
+		chave=rand()%RAND_MAX;
 		
 		//busca sequencial
 		gettimeofday(&inicio,NULL);
@@ -58,9 +58,9 @@ int iniciar(){
 		gettimeofday(&fim,NULL);
 		tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
 		
-		printf("Sequencial = %lf\tBinaria = %lf\n",tmili_seq, tmili_bin);
+		printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
 		
 		//free(vet_temp);
-		qtd+=100;
+		qtd+=1000;
 	}
 }
