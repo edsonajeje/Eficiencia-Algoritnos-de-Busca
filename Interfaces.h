@@ -29,13 +29,11 @@ int iniciar(){
 	while(tmili_seq<=tmili_bin){
 		for(int i=0;i<qtd;i++){
 			cod=rand()%RAND_MAX;
-			printf("Entrou no for vez %d\n",i);
 			vet_temp[i].cod=a[cod].cod;
 			strcpy(vet_temp[i].nome,a[cod].nome);
 			strcpy(vet_temp[i].email,a[cod].email);
 			strcpy(vet_temp[i].senha,a[cod].senha);
 			
-			printf("%d\t",vet_temp[i].cod);
 			if(qtd<999999)
 				cod+=((rand()%RAND_MAX)/1000)/100;
 			else
