@@ -58,7 +58,7 @@ int iniciar(){
 		gettimeofday(&fim,NULL);
 		tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
 		
-		printf("Sequencial = %lf\tBinaria = %lf",tmili_seq, tmili_bin);
+		printf("Sequencial = %lf\tBinaria = %lf\n",tmili_seq, tmili_bin);
 		
 		//free(vet_temp);
 		qtd+=100;
