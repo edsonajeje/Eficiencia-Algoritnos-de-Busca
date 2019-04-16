@@ -37,7 +37,7 @@ int iniciar(){
 			
 			printf("%d\t",vet_temp[i].cod);
 			if(qtd<999999)
-				cod+=((rand()%RAND_MAX)/3)/1000;
+				cod+=((rand()%RAND_MAX)/1000)/100;
 			else
 				cod=999999;
 		}
@@ -62,7 +62,7 @@ int iniciar(){
 		
 		printf("Sequencial = %lf\tBinaria = %lf",tmili_seq, tmili_bin);
 		
-		free(vet_temp);
+		//free(vet_temp);
 		qtd+=100;
 	}
 }
