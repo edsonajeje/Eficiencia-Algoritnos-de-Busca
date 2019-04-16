@@ -1,8 +1,13 @@
-#include<time.h>
+#include<sys/time.h>
 
 #ifndef CompararBuscas
 #define CompararBuscas
 
-float medirTempo(time_t x);
+clock_t medirTempo(clock_t x);
 
 #endif
+
+clock_t medirTempo(clock_t x){
+	x=clock();
+	return x;
+}
