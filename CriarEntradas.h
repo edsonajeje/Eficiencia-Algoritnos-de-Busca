@@ -1,10 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-#include "ManipulaArquivos.h"
 
-#define TAM 50
+#include "ManipulaArquivos.h"
 
 #ifndef CriarEntradas
 #define CriarEntradas
