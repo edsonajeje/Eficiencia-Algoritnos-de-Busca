@@ -1,6 +1,8 @@
 #include<stdlib.h>
 #include<string.h>
 
+#define TAM 50
+
 #ifndef CriarVetor
 #define CriarVetor
 
@@ -20,7 +22,7 @@ void abastecer(User a[], FILE *fp);
 void abastecer(User a[], FILE *fp){
 	printf("entrou no abastecer\n");
 	int i=0;
-	fp=fopen(url,"r");
+	fp=fopen(url,"a+");
 	if(fp == NULL){
 		printf("\nErro na abertura do arquivo!");
 		exit(1);
