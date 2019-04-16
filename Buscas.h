@@ -10,8 +10,9 @@ bool binaria (User a[], int chave, int n);
 bool sequencial(User a[], int chave, int n){
 	int pos=0;
 	bool encontrado=false;
-	while(a[pos].cod!=chave&&pos<n)
+	while(a[pos].cod!=chave&&pos<n){
 		pos++;
+	}
 	if(pos<n)
 		encontrado=true;
 	return encontrado;
