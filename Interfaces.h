@@ -1,55 +1,57 @@
+#include "Bibliotecas.h"
+
+
 
 #ifndef Interfaces
 #define Interfaces
 
-void iniciar();
+int iniciar();
 
 #endif
 
-void iniciar(){
-	int escolha=-1;
-	while(escolha!=0){
-		printf("Digite a opção que deseja\n");
-		printf("[1] Para testar Busca Sequencial x Binaria com BubbleSort\n");
-		printf("[2] Para testar Busca Sequencial x Binaria com QuickSort\n");
-		printf("[3] Para testar Busca Sequencial x Binaria com InsertionSort\n");
-		printf("[4] Para testar Busca Sequencial x Binaria com SelectionSort\n");
-		printf("[5] Para testar Busca Sequencial x Binaria com MergeSort\n");
-		printf("[6] Para testar Busca Sequencial x Binaria com ShellSort\n");
-		//printf("[1] Para testar Busca Sequencial x Binaria com QuickSort\n");
-		scanf("%d",&escolha);
-		switch (escolha){
-			case 1:{
-				break;
-			}
-			case 2:{
-				break;
-			}
-			case 3:{
-				
-				break;
-			}
-			case 4:{
-				break;
-			}
-			case 5:{
-				break;
-			}
-			case 6:{
-				
-				break;
-			}
-			case 7:{
-				
-				break;
-			}
-			case 0:{
-				break;
-			}
-			default: {
-				printf("A opção digitada é Invalida\n");
-				break;
-			}
+
+
+int iniciar(){
+	int qtd=150;
+	
+	struct timeval inicio, fim;
+	double tmili_seq, tmili_bin;
+	int chave;
+	
+	tmili_seq=-1; tmili_bin=0;
+	
+	srand(time(NULL));
+	long int cod=rand()%RAND_MAX;
+	
+	//sequencial X binaria & BubbleSort
+	while(tmili_seq<=tmili_bin){
+		User *vet_temp=(User*)malloc(qtd*sizeof(User));
+		for(int i=0;i<qtd;i++){
+			vet_temp[i]=a[cod];
+			if(qtd<90000)
+				cod+=rand()%RAND_MAX/3;
+			else
+				cod+=rand()%1000;
 		}
+		
+		chave=vet_temp[rand()%cod].cod;
+		
+		//busca sequencial
+		gettimeofday(&inicio,NULL);
+		sequencial(vet_temp,chave,qtd);
+		gettimeofday(&fim,NULL);
+		tmili_seq=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+		
+		//busca binaria
+		gettimeofday(&inicio,NULL);
+		bubble(vet_temp,qtd);
+		binaria(vet_temp,chave,qtd);
+		gettimeofday(&fim,NULL);
+		tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+		
+		printf("Sequencial = %lf\tBinaria = %lf",tmili_seq, tmili_bin);
+		
+		free(vet_temp);
+		qtd+=100;
 	}
 }
