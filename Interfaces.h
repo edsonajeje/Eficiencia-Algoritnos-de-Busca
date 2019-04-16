@@ -21,7 +21,7 @@ int iniciar(){
 	tmili_seq=-1; tmili_bin=0;
 	
 	srand(time(NULL));
-	long int cod=rand()%RAND_MAX;
+	long int cod;
 	
 	User *vet_temp=(User*)malloc(100000*sizeof(User));
 	
