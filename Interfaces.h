@@ -49,6 +49,8 @@ void seq_bin_bubble(){
 		
 		chave=rand()%RAND_MAX;
 		
+		inicio.tv_sec=0;inicio.tv_usec=0;
+		fim.tv_sec=0;fim.tv_usec=0;
 		//busca sequencial
 		gettimeofday(&inicio,NULL);
 		sequencial(vet_temp,chave,qtd);
@@ -343,10 +345,10 @@ void seq_bin_shell(){
 }
 
 void iniciar(){
-	seq_bin_bubble();
-	//seq_bin_insertion();
-	/*seq_bin_merge();
-	seq_bin_quick();
-	seq_bin_selection();
-	seq_bin_shell();*/
+	//seq_bin_bubble();
+	seq_bin_insertion();
+	//seq_bin_merge();
+	//seq_bin_quick();
+	//seq_bin_selection();
+	//seq_bin_shell();
 }
