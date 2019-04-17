@@ -3,13 +3,14 @@
 #ifndef ShellSort
 #define ShellSort
 
-void shell(int a[], int n);
+void shell(User a[], int n);
 
 
 #endif
 
-void shell(int a[], int n){
-	int idChave, chaveAtual, i, k=3, h=1;
+void shell(User a[], int n){
+	int idChave, i, k=3, h=1;
+	User chaveAtual;
 	
 	while(h<=n){
 		h=k*h+1;
@@ -20,7 +21,7 @@ void shell(int a[], int n){
 		for(idChave=h;idChave<=n-1;idChave++){
 			chaveAtual=a[idChave];
 			i=idChave-h;
-			while(i>=0&&a[i]>chaveAtual){
+			while(i>=0&&a[i].cod>chaveAtual.cod){
 				a[i+h]=a[i];
 				i=i-h;
 			}
