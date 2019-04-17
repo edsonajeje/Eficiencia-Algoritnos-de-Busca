@@ -2,20 +2,21 @@
 #ifndef QuickSort
 #define QuickSort
 
-int particona(int a[], int p, int r);
-void quicksort(int a[], int p, int r);
+int particona(User a[], int p, int r);
+void quicksort(User a[], int p, int r);
 
 #endif
 
-int particiona(int a[], int p, int r){
-	int pivo, esq, dir, aux;
-	esq=p; dir=r; pivo=a[p];
+int particiona(User a[], int p, int r){
+	int pivo, esq, dir;
+	User aux;
+	esq=p; dir=r; pivo=a[p].cod;
 	
 	while(esq<dir){
-		while(a[esq]<=pivo){
+		while(a[esq].cod<=pivo){
 			esq=esq+1;
 		}
-		while(a[dir]>pivo){
+		while(a[dir].cod>pivo){
 			dir=dir-1;
 		}
 		if(esq<dir){
@@ -25,12 +26,12 @@ int particiona(int a[], int p, int r){
 		}
 	}
 	a[p]=a[dir];
-	a[dir]=pivo;
+	a[dir].cod=pivo;
 	
 	return dir;
 }
 
-void quicksort(int a[], int p, int r){
+void quicksort(User a[], int p, int r){
 	int q;
 	if(p<r){
 		q=particiona(a,p,r);
