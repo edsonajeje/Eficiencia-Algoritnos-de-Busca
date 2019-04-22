@@ -12,6 +12,7 @@ void seq_bin_merge();
 void seq_bin_quick();
 void seq_bin_selection();
 void seq_bin_shell();
+void seq_bin_heap();
 
 
 void iniciar();
@@ -19,10 +20,13 @@ void iniciar();
 #endif
 
 void seq_bin_bubble(){
-	int qtd=1000;
+	int qtd=1000, y;
 	
+	int *chave=(int*)malloc(100000*sizeof(int));
+	
+	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin;
+	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -44,19 +48,26 @@ void seq_bin_bubble(){
 		strcpy(vet_temp2[i].senha,a[i].senha);
 	}
 	
+	for(int i=0;i<qtd;i++){
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[i]=y;
+		}else{
+			chave[i]=rand()%RAND_MAX;
+		}
+	}
+	
 	//sequencial X binaria & BubbleSort
 	while(tmili_seq<=tmili_bin){
-		int chave[qtd];
-		int cont=0, y;
+		int cont=0;
 		
-		for(int i=0;i<qtd;i++){
-			y=rand()%RAND_MAX*3;
-			if(y>RAND_MAX&&y<100000){
-				chave[i]=y;
-			}else{
-				chave[i]=rand()%RAND_MAX;
-			}
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[qtd-1]=y;
+		}else{
+			chave[qtd-1]=rand()%RAND_MAX;
 		}
+		
 		
 		//Ordenação
 		gettimeofday(&inicio,NULL);
@@ -64,34 +75,48 @@ void seq_bin_bubble(){
 		gettimeofday(&fim,NULL);
 		tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
 			
-		for(cont;cont<qtd;cont++){
+		while(cont<qtd){
 						
 			//busca sequencial
 			gettimeofday(&inicio,NULL);
-			sequencial(vet_temp,chave[cont],qtd);
+			t=clock();
+			sequencial(vet_temp,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
-			tmili_seq=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			t=clock()-t;
+			tmili_seq+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_seq2+=((float)t)/CLOCKS_PER_SEC;
+			
 			
 			//busca binaria
 			gettimeofday(&inicio,NULL);
-			binaria(vet_temp2,chave[cont],qtd);
+			t=clock();
+			binaria(vet_temp2,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
+			t=clock()-t;
 			tmili_bin+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_bin2+=((float)t)/CLOCKS_PER_SEC;
 			
-			printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
-		
+			cont++;
+			if(tmili_seq>tmili_bin)
+				break;
 		}
-		
 		qtd+=1000;
 	}
+	printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\nQTD = %d\tSequencial = %lf\tBinaria = %lf\n\n",qtd, tmili_seq, tmili_bin,qtd, tmili_seq2, tmili_bin2);
+	free(vet_temp);
+	free(vet_temp2);
+	free(chave);
 }
 
 
 void seq_bin_insertion(){
-	int qtd=100;
+	int qtd=100, y;
 	
+	int *chave=(int*)malloc(100000*sizeof(int));
+	
+	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin;
+	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -113,19 +138,26 @@ void seq_bin_insertion(){
 		strcpy(vet_temp2[i].senha,a[i].senha);
 	}
 	
+	for(int i=0;i<qtd;i++){
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[i]=y;
+		}else{
+			chave[i]=rand()%RAND_MAX;
+		}
+	}
+	
 	//sequencial X binaria & BubbleSort
 	while(tmili_seq<=tmili_bin){
-		int chave[qtd];
-		int cont=0, y;
+		int cont=0;
 		
-		for(int i=0;i<qtd;i++){
-			y=rand()%RAND_MAX*3;
-			if(y>RAND_MAX&&y<100000){
-				chave[i]=y;
-			}else{
-				chave[i]=rand()%RAND_MAX;
-			}
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[qtd-1]=y;
+		}else{
+			chave[qtd-1]=rand()%RAND_MAX;
 		}
+		
 		
 		//Ordenação
 		gettimeofday(&inicio,NULL);
@@ -137,31 +169,43 @@ void seq_bin_insertion(){
 						
 			//busca sequencial
 			gettimeofday(&inicio,NULL);
-			sequencial(vet_temp,chave[cont],qtd);
+			t=clock();
+			sequencial(vet_temp,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
-			tmili_seq=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			t=clock()-t;
+			tmili_seq+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_seq2+=((float)t)/CLOCKS_PER_SEC;
+			
 			
 			//busca binaria
 			gettimeofday(&inicio,NULL);
-			binaria(vet_temp2,chave[cont],qtd);
+			t=clock();
+			binaria(vet_temp2,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
+			t=clock()-t;
 			tmili_bin+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
-			
-			printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
+			tmili_bin2+=((float)t)/CLOCKS_PER_SEC;
 			
 			cont++;
+			if(tmili_seq>tmili_bin)
+				break;
 		}
-		
 		qtd+=50;
 	}
+	printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\nQTD = %d\tSequencial = %lf\tBinaria = %lf\n\n",qtd, tmili_seq, tmili_bin,qtd, tmili_seq2, tmili_bin2);
+	free(vet_temp);
+	free(vet_temp2);
+	free(chave);
 }
 
 void seq_bin_merge(){
-	int qtd=100;
+	int qtd=100, y;
 	
-	struct timeval inicio, fim, inicio1, fim1;
-	double tmili_seq, tmili_bin;
-	clock_t ini, f;
+	int *chave=(int*)malloc(100000*sizeof(int));
+	
+	clock_t t;
+	struct timeval inicio, fim;
+	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -183,60 +227,74 @@ void seq_bin_merge(){
 		strcpy(vet_temp2[i].senha,a[i].senha);
 	}
 	
+	for(int i=0;i<qtd;i++){
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[i]=y;
+		}else{
+			chave[i]=rand()%RAND_MAX;
+		}
+	}
+	
 	//sequencial X binaria & BubbleSort
 	while(tmili_seq<=tmili_bin){
-		int chave[qtd];
-		int cont=0, y;
+		int cont=0;
 		
-		for(int i=0;i<qtd;i++){
-			y=rand()%RAND_MAX*3;
-			if(y>RAND_MAX&&y<100000){
-				chave[i]=y;
-			}else{
-				chave[i]=rand()%RAND_MAX;
-			}
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[qtd-1]=y;
+		}else{
+			chave[qtd-1]=rand()%RAND_MAX;
 		}
+		
 		
 		//Ordenação
-		//gettimeofday(&inicio,NULL);
-		ini=clock();
+		gettimeofday(&inicio,NULL);
 		mergeSort(vet_temp2,0,100000);
-		//gettimeofday(&fim,NULL);
-		f=clock();
-		//tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
-		tmili_bin=(f-ini)/1000;
+		gettimeofday(&fim,NULL);
+		tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
 			
-		for(cont;cont<qtd;cont++){
+		while(cont<qtd){
 						
 			//busca sequencial
-			//gettimeofday(&inicio1,NULL);
-			ini=clock();
-			sequencial(vet_temp,chave[cont],qtd);
-			//gettimeofday(&fim1,NULL);
-			f=clock();
-			tmili_seq=(f-ini)/1000;//(1000*(fim1.tv_sec-inicio1.tv_sec)+(fim1.tv_usec-inicio1.tv_usec)/1000);
+			gettimeofday(&inicio,NULL);
+			t=clock();
+			sequencial(vet_temp,cont,chave,qtd);
+			gettimeofday(&fim,NULL);
+			t=clock()-t;
+			tmili_seq+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_seq2+=((float)t)/CLOCKS_PER_SEC;
+			
 			
 			//busca binaria
-			//gettimeofday(&inicio,NULL);
-			ini=clock();
-			binaria(vet_temp2,chave[cont],qtd);
-			//gettimeofday(&fim,NULL);
-			f=clock();
-			tmili_bin+=(f-ini)/1000;//(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			gettimeofday(&inicio,NULL);
+			t=clock();
+			binaria(vet_temp2,cont,chave,qtd);
+			gettimeofday(&fim,NULL);
+			t=clock()-t;
+			tmili_bin+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_bin2+=((float)t)/CLOCKS_PER_SEC;
 			
-			//printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
-		
+			cont++;
+			if(tmili_seq>tmili_bin)
+				break;
 		}
-		
 		qtd+=50;
-		printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
 	}
+	printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\nQTD = %d\tSequencial = %lf\tBinaria = %lf\n\n",qtd, tmili_seq, tmili_bin,qtd, tmili_seq2, tmili_bin2);
+	free(vet_temp);
+	free(vet_temp2);
+	free(chave);
 }
+
 void seq_bin_quick(){
-	int qtd=100;
+	int qtd=100, y;
 	
+	int *chave=(int*)malloc(100000*sizeof(int));
+	
+	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin;
+	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -258,19 +316,26 @@ void seq_bin_quick(){
 		strcpy(vet_temp2[i].senha,a[i].senha);
 	}
 	
+	for(int i=0;i<qtd;i++){
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[i]=y;
+		}else{
+			chave[i]=rand()%RAND_MAX;
+		}
+	}
+	
 	//sequencial X binaria & BubbleSort
 	while(tmili_seq<=tmili_bin){
-		int chave[qtd];
-		int cont=0, y;
+		int cont=0;
 		
-		for(int i=0;i<qtd;i++){
-			y=rand()%RAND_MAX*3;
-			if(y>RAND_MAX&&y<100000){
-				chave[i]=y;
-			}else{
-				chave[i]=rand()%RAND_MAX;
-			}
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[qtd-1]=y;
+		}else{
+			chave[qtd-1]=rand()%RAND_MAX;
 		}
+		
 		
 		//Ordenação
 		gettimeofday(&inicio,NULL);
@@ -282,30 +347,43 @@ void seq_bin_quick(){
 						
 			//busca sequencial
 			gettimeofday(&inicio,NULL);
-			sequencial(vet_temp,chave[cont],qtd);
+			t=clock();
+			sequencial(vet_temp,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
-			tmili_seq=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			t=clock()-t;
+			tmili_seq+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_seq2+=((float)t)/CLOCKS_PER_SEC;
+			
 			
 			//busca binaria
 			gettimeofday(&inicio,NULL);
-			binaria(vet_temp2,chave[cont],qtd);
+			t=clock();
+			binaria(vet_temp2,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
+			t=clock()-t;
 			tmili_bin+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
-			
-			printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
+			tmili_bin2+=((float)t)/CLOCKS_PER_SEC;
 			
 			cont++;
+			if(tmili_seq>tmili_bin)
+				break;
 		}
-		
 		qtd+=50;
 	}
+	printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\nQTD = %d\tSequencial = %lf\tBinaria = %lf\n\n",qtd, tmili_seq, tmili_bin,qtd, tmili_seq2, tmili_bin2);
+	free(vet_temp);
+	free(vet_temp2);
+	free(chave);
 }
 
 void seq_bin_selection(){
-	int qtd=100;
+	int qtd=100, y;
 	
+	int *chave=(int*)malloc(100000*sizeof(int));
+	
+	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin;
+	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -327,19 +405,26 @@ void seq_bin_selection(){
 		strcpy(vet_temp2[i].senha,a[i].senha);
 	}
 	
+	for(int i=0;i<qtd;i++){
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[i]=y;
+		}else{
+			chave[i]=rand()%RAND_MAX;
+		}
+	}
+	
 	//sequencial X binaria & BubbleSort
 	while(tmili_seq<=tmili_bin){
-		int chave[qtd];
-		int cont=0, y;
+		int cont=0;
 		
-		for(int i=0;i<qtd;i++){
-			y=rand()%RAND_MAX*3;
-			if(y>RAND_MAX&&y<100000){
-				chave[i]=y;
-			}else{
-				chave[i]=rand()%RAND_MAX;
-			}
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[qtd-1]=y;
+		}else{
+			chave[qtd-1]=rand()%RAND_MAX;
 		}
+		
 		
 		//Ordenação
 		gettimeofday(&inicio,NULL);
@@ -351,30 +436,43 @@ void seq_bin_selection(){
 						
 			//busca sequencial
 			gettimeofday(&inicio,NULL);
-			sequencial(vet_temp,chave[cont],qtd);
+			t=clock();
+			sequencial(vet_temp,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
-			tmili_seq=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			t=clock()-t;
+			tmili_seq+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_seq2+=((float)t)/CLOCKS_PER_SEC;
+			
 			
 			//busca binaria
 			gettimeofday(&inicio,NULL);
-			binaria(vet_temp2,chave[cont],qtd);
+			t=clock();
+			binaria(vet_temp2,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
+			t=clock()-t;
 			tmili_bin+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
-			
-			printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
+			tmili_bin2+=((float)t)/CLOCKS_PER_SEC;
 			
 			cont++;
+			if(tmili_seq>tmili_bin)
+				break;
 		}
-		
 		qtd+=50;
 	}
+	printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\nQTD = %d\tSequencial = %lf\tBinaria = %lf\n\n",qtd, tmili_seq, tmili_bin,qtd, tmili_seq2, tmili_bin2);
+	free(vet_temp);
+	free(vet_temp2);
+	free(chave);
 }
 
 void seq_bin_shell(){
-	int qtd=100;
+	int qtd=100, y;
 	
+	int *chave=(int*)malloc(100000*sizeof(int));
+	
+	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin;
+	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -396,19 +494,26 @@ void seq_bin_shell(){
 		strcpy(vet_temp2[i].senha,a[i].senha);
 	}
 	
+	for(int i=0;i<qtd;i++){
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[i]=y;
+		}else{
+			chave[i]=rand()%RAND_MAX;
+		}
+	}
+	
 	//sequencial X binaria & BubbleSort
 	while(tmili_seq<=tmili_bin){
-		int chave[qtd];
-		int cont=0, y;
+		int cont=0;
 		
-		for(int i=0;i<qtd;i++){
-			y=rand()%RAND_MAX*3;
-			if(y>RAND_MAX&&y<100000){
-				chave[i]=y;
-			}else{
-				chave[i]=rand()%RAND_MAX;
-			}
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[qtd-1]=y;
+		}else{
+			chave[qtd-1]=rand()%RAND_MAX;
 		}
+		
 		
 		//Ordenação
 		gettimeofday(&inicio,NULL);
@@ -420,31 +525,130 @@ void seq_bin_shell(){
 						
 			//busca sequencial
 			gettimeofday(&inicio,NULL);
-			sequencial(vet_temp,chave[cont],qtd);
+			t=clock();
+			sequencial(vet_temp,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
-			tmili_seq=(1000000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000000);
+			t=clock()-t;
+			tmili_seq+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_seq2+=((float)t)/CLOCKS_PER_SEC;
+			
 			
 			//busca binaria
 			gettimeofday(&inicio,NULL);
-			binaria(vet_temp2,chave[cont],qtd);
+			t=clock();
+			binaria(vet_temp2,cont,chave,qtd);
 			gettimeofday(&fim,NULL);
+			t=clock()-t;
 			tmili_bin+=(1000000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000000);
-			
-			//printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
+			tmili_bin2+=((float)t)/CLOCKS_PER_SEC;
 			
 			cont++;
+			if(tmili_seq>tmili_bin)
+				break;
+		}
+		qtd+=50;
+	}
+	printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\nQTD = %d\tSequencial = %lf\tBinaria = %lf\n\n",qtd, tmili_seq, tmili_bin,qtd, tmili_seq2, tmili_bin2);
+	free(vet_temp);
+	free(vet_temp2);
+	free(chave);
+}
+
+void seq_bin_heap(){
+	int qtd=100, y;
+	
+	int *chave=(int*)malloc(100000*sizeof(int));
+	
+	clock_t t;
+	struct timeval inicio, fim;
+	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
+	
+	tmili_seq=-1; tmili_bin=0;
+	
+	srand(time(NULL));
+	long int cod;
+
+	User *vet_temp=(User*)malloc(100000*sizeof(User));
+	User *vet_temp2=(User*)malloc(100000*sizeof(User));
+	
+	for(int i=0;i<100000;i++){
+		vet_temp[i].cod=a[i].cod;
+		strcpy(vet_temp[i].nome,a[i].nome);
+		strcpy(vet_temp[i].email,a[i].email);
+		strcpy(vet_temp[i].senha,a[i].senha);
+		
+		vet_temp2[i].cod=a[i].cod;
+		strcpy(vet_temp2[i].nome,a[i].nome);
+		strcpy(vet_temp2[i].email,a[i].email);
+		strcpy(vet_temp2[i].senha,a[i].senha);
+	}
+	
+	for(int i=0;i<qtd;i++){
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[i]=y;
+		}else{
+			chave[i]=rand()%RAND_MAX;
+		}
+	}
+	
+	//sequencial X binaria & BubbleSort
+	while(tmili_seq<=tmili_bin){
+		int cont=0;
+		
+		y=rand()%RAND_MAX*3;
+		if(y>RAND_MAX&&y<100000){
+			chave[qtd-1]=y;
+		}else{
+			chave[qtd-1]=rand()%RAND_MAX;
 		}
 		
+		
+		//Ordenação
+		gettimeofday(&inicio,NULL);
+		heapSort(vet_temp2,100000);
+		gettimeofday(&fim,NULL);
+		tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			
+		while(cont<qtd){
+						
+			//busca sequencial
+			gettimeofday(&inicio,NULL);
+			t=clock();
+			sequencial(vet_temp,cont,chave,qtd);
+			gettimeofday(&fim,NULL);
+			t=clock()-t;
+			tmili_seq+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_seq2+=((float)t)/CLOCKS_PER_SEC;
+			
+			
+			//busca binaria
+			gettimeofday(&inicio,NULL);
+			t=clock();
+			binaria(vet_temp2,cont,chave,qtd);
+			gettimeofday(&fim,NULL);
+			t=clock()-t;
+			tmili_bin+=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
+			tmili_bin2+=((float)t)/CLOCKS_PER_SEC;
+			
+			cont++;
+			if(tmili_seq>tmili_bin)
+				break;
+		}
 		qtd+=50;
-		printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\n",qtd, tmili_seq, tmili_bin);
 	}
+	printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\nQTD = %d\tSequencial = %lf\tBinaria = %lf\n\n",qtd, tmili_seq, tmili_bin,qtd, tmili_seq2, tmili_bin2);
+	free(vet_temp);
+	free(vet_temp2);
+	free(chave);
 }
 
 void iniciar(){
 	//seq_bin_bubble();
-	//seq_bin_insertion();
-	//seq_bin_merge();
-	//seq_bin_quick();
+	seq_bin_insertion();
+	seq_bin_merge();
+	seq_bin_quick();
 	//seq_bin_selection();
-	seq_bin_shell();
+	//seq_bin_shell();
+	//seq_bin_heap();
 }
