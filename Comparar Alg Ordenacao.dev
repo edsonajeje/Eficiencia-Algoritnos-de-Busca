@@ -27,9 +27,9 @@ CommandLine=
 Folders="Header Files","Souce Files"
 IncludeVersionInfo=0
 SupportXPThemes=0
-CompilerSet=0
-CompilerSettings=0000000000000000001000000
-UnitCount=17
+CompilerSet=2
+CompilerSettings=0000000000000000100000000
+UnitCount=18
 
 [VersionInfo]
 Major=1
@@ -212,6 +212,16 @@ BuildCmd=
 
 [Unit17]
 FileName=Bibliotecas.h
+CompileCpp=1
+Folder=Header Files
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit18]
+FileName=HeapSort.h
 CompileCpp=1
 Folder=Header Files
 Compile=1
