@@ -727,8 +727,9 @@ void iniciar(){
 		qtd+=1000;
 	}
 	printf("QTD = %d\tSequencial = %lf\tBinaria = %lf\nQTD = %d\tSequencial = %lf\tBinaria = %lf\n\n",qtd, tmili_seq, tmili_bin,qtd, tmili_seq2, tmili_bin2);
-	qtd=100;
 	*/
+	qtd=100;
+	
 	//sequencial X binaria & InsertionSort
 	while(tmili_seq<=tmili_bin){
 		int cont=0;
