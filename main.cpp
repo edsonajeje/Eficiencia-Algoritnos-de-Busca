@@ -13,50 +13,89 @@ main(){
 	
 	iniciar();
 	
-	/*int chave;//=50325;
-	qtd=3000;
+	/*int qtd=1000;
 	
-	User *teste=(User*)malloc(sizeof(User)*qtd);
+//	struct timeval inicio, fim;
 	
-	for(int i=0;i<qtd;i++){
-		teste[i].cod=a[i].cod;
-		//printf("%d\t",teste[i].cod);
-		if(i%2)
-			chave=teste[i].cod;
+	clock_t t;
+		struct timeval inicio, fim;
+	float aux, aux2, tmili_seq, tmili_bin, tmili_seq2, tmili_bin2;
+	bool achou=false;
+	
+	tmili_seq=-1; tmili_bin=0;
+	
+	srand(time(NULL));
+	long int cod;
+
+	User *vet_temp=(User*)malloc(100000*sizeof(User));
+	User *vet_temp2=(User*)malloc(100000*sizeof(User));
+	
+	for(int i=0;i<100000;i++){
+		//printf("For copiar vetor vez %d\t",i);
+		vet_temp[i].cod=a[i].cod;
+		strcpy(vet_temp[i].nome,a[i].nome);
+		strcpy(vet_temp[i].email,a[i].email);
+		strcpy(vet_temp[i].senha,a[i].senha);
+		
+		vet_temp2[i].cod=a[i].cod;
+		strcpy(vet_temp2[i].nome,a[i].nome);
+		strcpy(vet_temp2[i].email,a[i].email);
+		strcpy(vet_temp2[i].senha,a[i].senha);
 	}
+	printf("\nSaiu do for\n");
+	//Ordenação
+	t=clock();
+	shell(vet_temp2,100000);
+	printf("Saiu do shell\n");
+	t=clock()-t;
+	aux=((float)t)/CLOCKS_PER_SEC;
 	
-	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin;
-	gettimeofday(&inicio,0);
-	bool achou=sequencial(teste,chave,qtd);
-	gettimeofday(&fim,0);
-    tmili_seq=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
-	
-	printf("\n\n%d",achou);
-	printf("\n%d\n",chave);
-	
-	gettimeofday(&inicio,0);
-	bubble(teste,qtd);
-	achou=binaria(teste,chave,qtd);
-	gettimeofday(&fim,0);
-    tmili_bin=(1000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000);
-	
-	/*for(int i=0;i<qtd;i++)
-		printf("%d\t",teste[i].cod);
-	printf("\n");
-	
-	free(teste);
-	
-	
-	free(a);
-	printf("\n\n%d",achou);
-	printf("\nTempo gasto sequencial=%lf",tmili_seq);
-	printf("\nTempo gasto binaria=%lf",tmili_bin);
-	
-	time_t seconds;
-	seconds=time(NULL);
-	printf("\n%lf",seconds*1000.0/CLOCKS_PER_SEC);*/
-	
+	int vez=1;
+	int cont=0, y;
+	//sequencial X binaria & BubbleSort
+	while(tmili_seq<=tmili_bin){
+		cont=0;
+		//printf("Entrou no 1 while vez %d\t",vez);
+		int chave[qtd];
+		
+		for(int i=0;i<qtd;i++){
+			y=rand()%RAND_MAX*3;
+			if(y>RAND_MAX&&y<100000){
+				chave[i]=y;
+			}else{
+				chave[i]=rand()%RAND_MAX;
+			}
+		}
+			
+		for(cont;cont<qtd;cont++){
+			//printf("Entrou no for das comparações vez %d",cont);
+			//busca sequencial
+			gettimeofday(&inicio,NULL);
+			t=clock();
+			achou=sequencial(vet_temp,cont,chave,qtd);
+			gettimeofday(&fim,NULL);
+			t=clock()-t;
+			tmili_seq=(1000000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000000);
+			tmili_seq2=((float)t)/CLOCKS_PER_SEC;
+			
+			
+			//busca binaria
+			gettimeofday(&inicio,NULL);
+			t=clock();
+			achou=binaria(vet_temp2,cont,chave,qtd);
+			gettimeofday(&fim,NULL);
+			t=clock()-t;
+			tmili_bin+=(1000000*(fim.tv_sec-inicio.tv_sec)+(fim.tv_usec-inicio.tv_usec)/1000000);
+			tmili_bin2=((float)t)/CLOCKS_PER_SEC;
+			if(achou)
+				return 0;
+		}
+		//printf("\nSaiu do for das comparacoes\n");
+		qtd+=1000;
+		vez++;
+		printf("QTD = %d\taux = %f\tSequencial = %lf\tBinaria = %lf\nQTD = %d\taux = %f\tSequencial = %lf\tBinaria = %lf\n\n",qtd, aux, tmili_seq, tmili_bin,qtd, aux, tmili_seq2, tmili_bin2);
+	}
+	*/
 }
 
 
