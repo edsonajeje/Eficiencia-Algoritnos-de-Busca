@@ -20,13 +20,31 @@ int particiona(User a[], int p, int r){
 			dir=dir-1;
 		}
 		if(esq<dir){
-			aux=a[esq];
-			a[esq]=a[dir];
-			a[dir]=aux;
+			aux.cod=a[esq].cod;
+			strcpy(aux.email,a[esq].email);
+			strcpy(aux.nome,a[esq].nome);
+			strcpy(aux.senha,a[esq].senha);
+			
+			a[esq].cod=a[dir].cod;
+			strcpy(a[esq].email,a[dir].email);
+			strcpy(a[esq].nome,a[dir].nome);
+			strcpy(a[esq].senha,a[dir].senha);
+			
+			a[dir].cod=aux.cod;
+			strcpy(a[dir].email,aux.email);
+			strcpy(a[dir].nome,aux.nome);
+			strcpy(a[dir].senha,aux.senha);
 		}
 	}
-	a[p]=a[dir];
+	a[p].cod=a[dir].cod;
+	strcpy(a[p].email,a[dir].email);
+	strcpy(a[p].nome,a[dir].nome);
+	strcpy(a[p].senha,a[dir].senha);
+	
 	a[dir].cod=pivo;
+	strcpy(a[dir].email,a[pivo].email);
+	strcpy(a[dir].nome,a[pivo].nome);
+	strcpy(a[dir].senha,a[pivo].senha);
 	
 	return dir;
 }
