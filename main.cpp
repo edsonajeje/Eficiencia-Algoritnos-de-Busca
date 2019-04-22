@@ -9,10 +9,10 @@ main(){
 	
 	//gera_dado(fp);
 	
-	//abastecer(a,fp);
+	abastecer(a,fp);
 	
-	//iniciar();
-	
+	iniciar();
+	/*
 	int qtd=100, y;
 	
 	int *chave=(int*)malloc(100000*sizeof(int));
@@ -98,7 +98,7 @@ main(){
 	}
 	free(vet_temp);
 	free(vet_temp2);
-	free(chave);
+	free(chave);*/
 }
 
 
