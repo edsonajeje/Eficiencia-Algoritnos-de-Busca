@@ -26,7 +26,7 @@ void seq_bin_bubble(){
 	
 	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
+	double tmili_seq=0, tmili_bin=0,tmili_seq2=0, tmili_bin2=0;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -116,7 +116,7 @@ void seq_bin_insertion(){
 	
 	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
+	double tmili_seq=0, tmili_bin=0,tmili_seq2=0, tmili_bin2=0;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -205,7 +205,7 @@ void seq_bin_merge(){
 	
 	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
+	double tmili_seq=0, tmili_bin=0,tmili_seq2=0, tmili_bin2=0;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -294,7 +294,7 @@ void seq_bin_quick(){
 	
 	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
+	double tmili_seq=0, tmili_bin=0,tmili_seq2=0, tmili_bin2=0;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -383,7 +383,7 @@ void seq_bin_selection(){
 	
 	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
+	double tmili_seq=0, tmili_bin=0,tmili_seq2=0, tmili_bin2=0;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -472,7 +472,7 @@ void seq_bin_shell(){
 	
 	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
+	double tmili_seq=0, tmili_bin=0,tmili_seq2=0, tmili_bin2=0;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
@@ -561,7 +561,7 @@ void seq_bin_heap(){
 	
 	clock_t t;
 	struct timeval inicio, fim;
-	double tmili_seq, tmili_bin,tmili_seq2, tmili_bin2;
+	double tmili_seq=0, tmili_bin=0,tmili_seq2=0, tmili_bin2=0;
 	
 	tmili_seq=-1; tmili_bin=0;
 	
