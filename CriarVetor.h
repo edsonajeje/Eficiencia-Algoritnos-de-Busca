@@ -20,7 +20,6 @@ void abastecer(User a[], FILE *fp);
 #endif
 
 void abastecer(User a[], FILE *fp){
-	printf("entrou no abastecer\n");
 	int i=0;
 	fp=fopen(url,"a+");
 	if(fp == NULL){
@@ -31,6 +30,6 @@ void abastecer(User a[], FILE *fp){
 			fscanf(fp,"%d %s %s %s",&a[i].cod, &a[i].nome, &a[i].email, &a[i].senha);
 			i++;
 		}
-		fecha_arquivo(fp);
+		fclose(fp);
 	}
 }
