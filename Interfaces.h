@@ -646,9 +646,15 @@ void seq_bin_heap(){
 void iniciar(){
 	//seq_bin_bubble();
 	seq_bin_insertion();
-	seq_bin_merge();
+	system("pause");
+	/*seq_bin_merge();
+	system("pause");
 	seq_bin_quick();
-	//seq_bin_selection();
-	//seq_bin_shell();
-	//seq_bin_heap();
+	system("pause");
+	seq_bin_selection();
+	system("pause");*/
+	seq_bin_shell();
+	system("pause");
+	seq_bin_heap();
+	system("pause");
 }
